@@ -1,0 +1,41 @@
+<h1 class="headerpage">Tổng hợp tin tức giáo dục vnexpress</h1><br>
+<div align="center">
+    <span *ngIf='check_token; then Logoutcondition; else Logincondition'></span>
+    <ng-template #Logoutcondition >
+        <button mat-stroked-button color="primary" 
+            (click)="logout()">Đăng xuất</button>
+    </ng-template>
+    <ng-template #Logincondition>
+        <button mat-stroked-button color="primary" 
+            (click)="login()">Đăng nhập</button>&nbsp;
+        <button 
+            mat-stroked-button color="primary" 
+            (click)="logup()">Đăng ký</button>
+    </ng-template>
+</div>
+    <h3 class="hello">xin chào {{ vocative }} {{ name | uppercase}}</h3>
+        <span *ngIf="age>18; then Truecondition; else Falsecondition"></span>
+        <ng-template #Truecondition>
+            <span >Bạn đã trưởng thành</span>
+        </ng-template>
+        <ng-template #Falsecondition>
+            <span >Bạn là trẻ con</span>
+        </ng-template>
+        <br/>
+
+Nhập thông tin:
+<br/><br/>
+Tên: <input [(ngModel)]="name"/>
+<br/><br/>
+Tuổi: <input [(ngModel)]="age"/>
+<br/><br/>
+<button (click)="upage()" >Tăng tuổi</button>
+<br/><br/>
+<button (click)="downage()" >Giảm tuổi</button>
+<br/><br/>
+<h3>Thông tin người dùng:</h3>
+<span>
+    Tên:<span class="myscss">{{ name }}</span> 
+    ,tuổi:<span class="myscss">{{ age }}</span>
+</span>
+

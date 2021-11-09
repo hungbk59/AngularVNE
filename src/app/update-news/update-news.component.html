@@ -1,0 +1,33 @@
+<div class="container">
+    <h1><span *ngIf="id == 0">Thêm</span>
+        <span *ngIf="id >0"> Sửa</span> bài viết:</h1>
+    <form [formGroup] = "updateForm">
+        <mat-form-field class="form-header">
+            <mat-label>Tiêu đề</mat-label>
+            <input matInput placeholder="" formControlName="tieude" required/>
+        </mat-form-field><br>
+        <mat-form-field class="form-header">
+            <mat-label>Nội dung</mat-label>
+            <input matInput placeholder="" formControlName="noidung" required/>
+        </mat-form-field><br>
+        <mat-form-field class="form-header">
+            <mat-label>Link bài viết</mat-label>
+            <input matInput placeholder="https://vnexpress.net/example.html" 
+                    formControlName="uri"/>
+        </mat-form-field>
+        <br>
+        <button *ngIf="id == 0"
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!updateForm.valid"
+            (click)="postNew()">
+        Đăng bài</button>
+        <button *ngIf="id >0"
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!updateForm.valid"
+            (click)="putNew()">
+        Sửa bài</button>
+        <br>
+    </form><br>
+</div>

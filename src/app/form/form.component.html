@@ -1,0 +1,36 @@
+<div class="login-warppers">
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="profileForm" (ngSubmit)="signin()">
+        <div class="text-center">
+          <img src="https://s1.vnecdn.net/vnexpress/restruct/i/v446/v2_2019/pc/graphics/logo.svg" 
+                width="200" height="70" >
+          <h1 class="h3 mb-3 fw-normal">Đăng nhập tài khoản</h1>
+        </div>
+          <input type="email" 
+                  class="form-control" 
+                  id="inputLogin" 
+                  placeholder="Email address" 
+                  formControlName="email"
+                  required>
+
+          <input type="password" 
+                  class="form-control" 
+                  id="inputPassword" 
+                  placeholder="Mật khẩu"
+                  formControlName="password"
+                  autocomplete="on"
+                  required>
+                  
+          <div *ngIf="status == 404" class="alert alert-danger" role="alert">
+              Sai email hoặc mật khẩu
+          </div>
+          <span class="clicktext" [routerLink]="['/register']">Tạo tài khoản</span>
+        <button class="w-100 btn btn-lg btn-primary" 
+                type="submit"
+                [disabled]="!profileForm.valid">Đăng nhập</button>
+      </form>
+    </div> 
+  </div>
+</div>
+

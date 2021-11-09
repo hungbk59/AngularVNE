@@ -1,0 +1,51 @@
+<div class="login-warppers">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="registerForm" (ngSubmit)="signup()">
+          <div class="text-center">
+            <img src="https://s1.vnecdn.net/vnexpress/restruct/i/v446/v2_2019/pc/graphics/logo.svg" 
+                  width="200" height="70" >
+            <h1 class="h3 mb-3 fw-normal">Đăng ký tài khoản</h1>
+          </div>
+            <input type="email" 
+                    class="form-control" 
+                    id="inputLogin" 
+                    placeholder="Email address" 
+                    formControlName="email"
+                    required>
+  
+            <input type="password" 
+                    class="form-control" 
+                    id="inputPassword" 
+                    placeholder="Mật khẩu"
+                    formControlName="password"
+                    autocomplete="on"
+                    required>
+
+            <input type="password" 
+                    class="form-control" 
+                    id="retypePassword" 
+                    placeholder="Nhập lại Mật khẩu"
+                    formControlName="re_password"
+                    autocomplete="on"
+                    required>
+            <div *ngIf="status == 200" class="alert alert-success" role="alert">
+                Đăng ký thành công!
+            </div>
+            <div *ngIf="status == 401" class="alert alert-danger" role="alert">
+                Email và mật khẩu không hợp lệ
+            </div>
+            <div *ngIf="status == 400" class="alert alert-warning" role="alert">
+                Mật khẩu xác nhận không đúng
+            </div>
+            <div *ngIf="status == 404" class="alert alert-warning" role="alert">
+                Địa chỉ email đã được dùng
+            </div>
+            <span class="clicktext" [routerLink]="['/form']">Đăng nhập?</span>
+          <button class="w-100 btn btn-lg btn-primary" 
+                  type="submit"
+                  [disabled]="!registerForm.valid">Đăng ký</button>
+        </form>
+      </div> 
+    </div>
+  </div>

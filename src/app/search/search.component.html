@@ -1,0 +1,61 @@
+<h1 class="headerpage">TÌM KIẾM BÀI VIẾT</h1>
+<br/>
+<form [formGroup]="profileForm">
+    <div class="mat-sort-header-container">
+        <label for="tieude">Tiêu đề: </label>
+        <input id="tieude" type="text" [(ngModel)]='tieude' formControlName="tieude">
+    </div><br>
+    
+    <div class="mat-sort-header-container">
+        <label for="noidung">Nội dung: </label>
+        <input id="noidung" type="text" [(ngModel)]='noidung' formControlName="noidung">
+    </div><br>
+    <div class="mat-sort-header-container">
+        <button type="submit" 
+                class="btn btn-success" 
+                [disabled]="!profileForm.valid"
+                (click)="searchNew()">Tìm kiếm</button>
+    </div>
+</form>
+<br/>
+Kết quả tìm kiếm được 
+<span class="underpage">{{news?.length}}</span> bài báo:
+<br><br/>
+<div class="mat-sort-header-container">
+    <mat-spinner *ngIf="isloading"></mat-spinner>
+</div>
+<button mat-raised-button color="primary" (click)="postupdate()">
+    <mat-icon>add_box</mat-icon>Thêm bài viết</button>
+<div *ngFor="let new of news | paginate: 
+            {itemsPerPage: 5, currentPage: page}">
+    <table id="customers" style="border-collapse: collapse;">
+        <tr>
+            <th style="width:5%">Tiêu đề</th>
+            <td>{{new.tieude}}</td> 
+        </tr>
+        <tr>
+            <th>Mô tả</th>
+            <td>{{new.mota}}</td> 
+        </tr>
+        <tr>
+            <th>Nội dung</th>
+            <td>{{new.noidung}}</td> 
+        </tr>
+        <tr>
+            <th>LINK</th>
+            <td>{{new.uri}}&nbsp;&nbsp;<button
+                title="Xóa bài báo "
+                mat-icon-button color="warn"
+                (click)="deleteNew(new.id, new.tieude)">
+                <mat-icon>delete</mat-icon></button>&nbsp;&nbsp;
+                <button
+                title="Chỉnh sửa bài báo "
+                mat-icon-button color="primary"
+                (click)="editNew(new.id)">
+                <mat-icon>create</mat-icon></button></td> 
+        </tr><br>    
+    </table><br><br>
+</div><br>
+<div class="mat-sort-header-container">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+</div>
