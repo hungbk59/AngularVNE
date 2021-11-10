@@ -13,9 +13,18 @@
         <mat-form-field class="form-header">
             <mat-label>Link bài viết</mat-label>
             <input matInput placeholder="https://vnexpress.net/example.html" 
-                    formControlName="uri"/>
+                    formControlName="uri" required/>
         </mat-form-field>
         <br>
+        <div *ngIf="status == 200" class="alert alert-success" role="alert">
+            Thành công!
+        </div>
+        <div *ngIf="status == 401" class="alert alert-danger" role="alert">
+            Có ký tự không hợp lệ
+        </div>
+        <div *ngIf="status == 404" class="alert alert-warning" role="alert">
+            Bài viết không tồn tại
+        </div>
         <button *ngIf="id == 0"
             type="submit"
             class="btn btn-success"

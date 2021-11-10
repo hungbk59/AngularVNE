@@ -14,12 +14,14 @@
         <button type="submit" 
                 class="btn btn-success" 
                 [disabled]="!profileForm.valid"
-                (click)="searchNew()">Tìm kiếm</button>
+                (click)="searchNew()"
+                style="font-size: large">Tìm kiếm</button>
     </div>
 </form>
 <br/>
-Kết quả tìm kiếm được 
-<span class="underpage">{{news?.length}}</span> bài báo:
+<span class="textpage">Kết quả tìm kiếm được
+    <span class="numbernew">{{news?.length}}</span> bài báo:</span>
+
 <br><br/>
 <div class="mat-sort-header-container">
     <mat-spinner *ngIf="isloading"></mat-spinner>

@@ -10,6 +10,7 @@ import { HttpService } from '../Services/http.service';
 })
 export class UpdateNewsComponent implements OnInit {
   public id: number = 0;
+  public status: number = 0;
 
   public updateForm = new FormGroup({
     tieude: new FormControl(''),
@@ -18,6 +19,7 @@ export class UpdateNewsComponent implements OnInit {
   });
   
   ngOnInit(): void {
+    this.status
     this.id = this.route.snapshot.params['id'];
     if (this.id > 0){
         this.loadData(this.id);
@@ -56,8 +58,9 @@ export class UpdateNewsComponent implements OnInit {
     formData.append("tieude", this.updateForm.value.tieude);
     formData.append("noidung", this.updateForm.value.noidung);
     formData.append("url", this.updateForm.value.uri);
-    this.Http.addNew(formData).subscribe(
-      (response) => console.log(response),
+    this.Http.addNew(formData).subscribe((response) =>{
+      console.log(response)
+      this.status = response.status;},
       (error) => console.log(error))
   }
 
@@ -69,8 +72,9 @@ export class UpdateNewsComponent implements OnInit {
     formData.append("noidung", this.updateForm.value.noidung);
     formData.append("url", this.updateForm.value.uri);
     
-    this.Http.repairNew(formData).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error))
+    this.Http.repairNew(formData).subscribe((response) =>{
+      console.log(response)
+      this.status = response.status;},
+    (error) => console.log(error))
   }
 }

@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 
-
+//Component
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
@@ -29,11 +29,13 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 //animation module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 //interceptor module
-import { Interceptor } from './interceptor';
+import { Interceptor } from './Interceptor';
+//anglar-notification toastr
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -55,6 +57,7 @@ import { Interceptor } from './interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
     NgxPaginationModule,
 
     MatSliderModule,
@@ -68,6 +71,8 @@ import { Interceptor } from './interceptor';
     MatProgressSpinnerModule,
     MatInputModule,
     MatDialogModule,
+
+    ToastrModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true},

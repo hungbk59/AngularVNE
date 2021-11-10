@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../Services/auth.service';
 import { HttpService } from '../Services/http.service';
+import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form',
@@ -14,16 +15,20 @@ export class FormComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl(''),
   });
-  public status: number = 0;
+  public status: number =0;
   public token: any;
 
   constructor(
     private Http: HttpService,
     private authService: AuthService,
-    private router: Router,) {}
+    private location: Location,
+    private toastr: ToastrService,) {}
 
   ngOnInit(): void {
     this.status
+    if (this.authService.isLoggedIn()==false){
+      this.toastr.warning("Bạn không thể chỉnh sửa bài viết")
+    }
   }
   public signin(){
     console.log("login:");
@@ -40,7 +45,8 @@ export class FormComponent implements OnInit {
         this.token = response.token;
         if (this.status == 200){
           this.authService.settoken(this.token)
-          this.router.navigate(['/home'])}
+          this.toastr.success("Đăng nhập thành công!")
+          this.location.back();}
       },
       (error) => console.log(error),
     )}

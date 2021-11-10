@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../Services/auth.service';
 import { CommonService } from '../Services/common.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit {
   }
   public logout(){
     this.authService.removeToken()
+    this.toastr.warning("Bạn đã thoát tài khoản")
     console.log('Đã dăng xuất')
   }
   public login(){
@@ -42,12 +44,14 @@ export class HomeComponent implements OnInit {
   public logup(){
     this.router.navigate(['/register'])
   }
-
+  
   constructor(
     private common: CommonService,
     private authService: AuthService,
-    private router: Router,) {
+    private router: Router,
+    private toastr: ToastrService,) {
     this.age = common.age;
+    
   }
 
   ngOnInit(): void {
