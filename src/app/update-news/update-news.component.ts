@@ -12,11 +12,10 @@ export class UpdateNewsComponent implements OnInit {
   public id: number = 0;
   public status: number = 0;
 
-  public updateForm = new FormGroup({
-    tieude: new FormControl(''),
-    noidung: new FormControl(''),
-    uri: new FormControl(''),
-  });
+  constructor(
+    private Http: HttpService,
+    private route: ActivatedRoute,
+  ) {}
   
   ngOnInit(): void {
     this.status
@@ -25,6 +24,13 @@ export class UpdateNewsComponent implements OnInit {
         this.loadData(this.id);
     }
   }
+
+  public updateForm = new FormGroup({
+    tieude: new FormControl(''),
+    noidung: new FormControl(''),
+    uri: new FormControl(''),
+  });
+  
   private loadData(id: number){
     console.log('load-data', id)
     this.Http.getNewid(id).subscribe((data) => {
@@ -36,10 +42,6 @@ export class UpdateNewsComponent implements OnInit {
       }
     })
   }
-  constructor(
-    private Http: HttpService,
-    private route: ActivatedRoute,
-  ) { }
 
   private createNews(){
     const news: any = {};

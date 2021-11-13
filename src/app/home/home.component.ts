@@ -16,6 +16,16 @@ export class HomeComponent implements OnInit {
 
   public check_token: boolean = this.authService.isLoggedIn();
 
+  constructor(
+    private common: CommonService,
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService,) {
+    this.age = common.age;
+  }
+  ngOnInit(): void {
+    this.check_token
+  }
   public upage(){
     this.common.age++;
     this.age = this.common.age;
@@ -45,16 +55,4 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/register'])
   }
   
-  constructor(
-    private common: CommonService,
-    private authService: AuthService,
-    private router: Router,
-    private toastr: ToastrService,) {
-    this.age = common.age;
-    
-  }
-
-  ngOnInit(): void {
-    this.check_token
-  }
 }

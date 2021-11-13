@@ -21,14 +21,15 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
       console.log('canActivate', route,state);
       this.authuService.checkExpToken()
-
+      
       if (this.authuService.isLoggedIn()) {
         console.error('Đã đăng nhập')
+        return true;
       }
       else{
-        this.router.navigate(['/form'])
-        console.error('Không có quyền truy cập')
-      }
-    return true;
+        this.router.navigate(['/form'],{ queryParams: { returnUrl: state.url }})
+        console.error('Không có quyền truy cập') 
+        return false;
+      }   
   }
 }

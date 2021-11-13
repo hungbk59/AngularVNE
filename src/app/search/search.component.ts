@@ -22,20 +22,23 @@ export class SearchComponent implements OnInit {
   
   isloading=false;
 
+  constructor(
+    private Http: HttpService,
+    private router: Router,
+    private dialog: MatDialog,
+    private authService: AuthService,
+    private common: CommonService,){
+    this.tieude = common.search_title;
+    this.noidung = common.search_content;}
+
+  public ngOnInit(): void {
+    this.loadNews()
+  }
+
   public profileForm = new FormGroup({
     tieude: new FormControl(''),
     noidung: new FormControl(''),
   });
-  
-  public ngOnInit(): void {
-    this.isloading = true;
-    this.Http.getdata(this.tieude, this.noidung).subscribe((data) => {
-      this.news = data.list_news;
-      console.log('list-data:', this.news);
-      this.isloading = false;
-    });
-  }
-
   public postupdate(){
     this.router.navigate(['update/',0])
   }
@@ -43,6 +46,14 @@ export class SearchComponent implements OnInit {
     this.router.navigate(['update/',Newid])
   }
 
+  public loadNews(){
+    this.isloading = true;
+    this.Http.getdata(this.tieude, this.noidung).subscribe((data) => {
+      this.news = data.list_news;
+      console.log('list-data:', this.news);
+      this.isloading = false;
+    });
+  }
   public searchNew(){
     
     console.log("Search:");
@@ -52,7 +63,7 @@ export class SearchComponent implements OnInit {
     this.tieude =this.common.search_title= this.profileForm.value.tieude;
     this.noidung =this.common.search_content= this.profileForm.value.noidung;
 
-    this.ngOnInit()
+    this.loadNews()
   }
   
   public deleteNew(Newid: number, Newtitle: string){
@@ -76,13 +87,4 @@ export class SearchComponent implements OnInit {
       this.router.navigate(['/form'])
     }
   } 
-
-  constructor(
-    private Http: HttpService,
-    private router: Router,
-    private dialog: MatDialog,
-    private authService: AuthService,
-    private common: CommonService,
-  ){this.tieude = common.search_title;
-    this.noidung = common.search_content;}
 }
