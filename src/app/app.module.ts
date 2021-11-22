@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule,HttpClientXsrfModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //Component
 import { AppComponent } from './app.component';
@@ -13,8 +13,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterComponent } from './register/register.component';
 
-//PaginationModule
-import {NgxPaginationModule} from 'ngx-pagination';
 //Angular material 
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,7 +20,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
@@ -33,7 +30,6 @@ import { Interceptor } from './Interceptor';
 //anglar-notification toastr
 import { ToastrModule } from 'ngx-toastr';
 // Cookies service
-import { CookieModule } from 'ngx-cookie';
 import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
@@ -53,9 +49,6 @@ import { CookieService } from 'ngx-cookie-service';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HttpClientXsrfModule,
-
-    NgxPaginationModule,
 
     MatSliderModule,
     MatToolbarModule,
@@ -63,12 +56,10 @@ import { CookieService } from 'ngx-cookie-service';
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    MatProgressSpinnerModule,
     MatInputModule,
     MatDialogModule,
 
     ToastrModule.forRoot(),
-    CookieModule.forRoot(),
   ],
   providers: [CookieService,
     {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true},
