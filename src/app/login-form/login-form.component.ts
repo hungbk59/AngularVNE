@@ -27,10 +27,7 @@ export class LoginFormComponent implements OnInit {
     private router: Router,) {}
 
   ngOnInit(): void {
-    this.status
-    if (this.authService.isLoggedIn()==false){
-      this.toastr.warning("Bạn không thể chỉnh sửa bài viết")
-    }
+    this.status;
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   public signin(){

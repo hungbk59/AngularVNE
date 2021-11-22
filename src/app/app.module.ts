@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule,HttpClientXsrfModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //Component
 import { AppComponent } from './app.component';
@@ -32,6 +32,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Interceptor } from './Interceptor';
 //anglar-notification toastr
 import { ToastrModule } from 'ngx-toastr';
+// Cookies service
+import { CookieModule } from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,7 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    HttpClientXsrfModule,
 
     NgxPaginationModule,
 
@@ -64,8 +68,9 @@ import { ToastrModule } from 'ngx-toastr';
     MatDialogModule,
 
     ToastrModule.forRoot(),
+    CookieModule.forRoot(),
   ],
-  providers: [
+  providers: [CookieService,
     {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true},
   ],
   bootstrap: [AppComponent]

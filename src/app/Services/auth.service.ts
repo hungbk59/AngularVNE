@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cookie: CookieService) { }
 
   public settoken(token: string) {
     if (!token){
       this.removeToken()
       return;
     }
-    localStorage.setItem('token', token);
+    this.cookie.set('token',token,{path: '/', domain: 'localhost', secure: true, sameSite:'Lax'});
 
     const helper = new JwtHelperService();
     const decodeToken = helper.decodeToken(token);
@@ -26,16 +27,16 @@ export class AuthService {
   }
 
   public removeToken() {
-    localStorage.removeItem('token');
+    this.cookie.delete('token',  '/', 'localhost', true, "Lax");
     this.router.navigate(['/form'])
   }
 
   public gettoken() {
-    return localStorage.getItem('token');
+    return this.cookie.get('token');
   }
 
   public isLoggedIn(): boolean {
-    return this.gettoken() !== null
+    return this.cookie.check('token')
   }
 
   public checkExpToken(){

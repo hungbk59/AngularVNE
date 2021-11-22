@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatConfirmDialogComponent } from '../mat-confirm-dialog/mat-confirm-dialog.component';
 import { AuthService } from '../Services/auth.service';
 import { CommonService } from '../Services/common.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-search',
@@ -27,6 +28,7 @@ export class SearchComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private authService: AuthService,
+    private toastr: ToastrService,
     private common: CommonService,){
     this.tieude = common.search_title;
     this.noidung = common.search_content;}
@@ -84,6 +86,7 @@ export class SearchComponent implements OnInit {
       })
     }
     else{
+      this.toastr.warning("Đăng nhập để xóa bài viết")
       this.router.navigate(['/form'])
     }
   } 

@@ -1,7 +1,8 @@
 <div class="login-warppers">
   <div class="card">
     <div class="card-body">
-      <form [formGroup]="profileForm" (ngSubmit)="signin()">
+      <form [formGroup]="profileForm" (ngSubmit)="signin()" method="post">
+        <input type="hidden" name="csrf_token" value="{{ token }}"/>
         <div class="text-center">
           <img src="https://s1.vnecdn.net/vnexpress/restruct/i/v446/v2_2019/pc/graphics/logo.svg" 
                 width="200" height="70" >
@@ -28,7 +29,7 @@
           <span class="clicktext" [routerLink]="['/register']">Tạo tài khoản</span>
         <button class="w-100 btn btn-lg btn-primary" 
                 type="submit"
-                [disabled]="!profileForm.valid">Đăng nhập</button>
+                [disabled]="!profileForm.valid">Đăng nhập</button>    
       </form>
     </div> 
   </div>

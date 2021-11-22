@@ -15,49 +15,49 @@ export class HttpService {
   constructor(private httpclient: HttpClient) {}
 
   login(data: any){
-    const url = `${this.REST_API_SERVER}/data/login`;
+    const url = `${this.REST_API_SERVER}/api/login`;
     return this.httpclient
     .post<any>(url, data)
     .pipe(catchError(this.handleError));
   }
 
   register(data: any){
-    const url = `${this.REST_API_SERVER}/data/register`;
+    const url = `${this.REST_API_SERVER}/api/register`;
     return this.httpclient
     .post<any>(url, data)
     .pipe(catchError(this.handleError));
   }
 
   getdata(tieude: any, noidung: any) {
-    const url = `${this.REST_API_SERVER}/data/search?tieude=`+tieude+`&noidung=`+noidung;
+    const url = `${this.REST_API_SERVER}/api/search?tieude=`+tieude+`&noidung=`+noidung;
     return this.httpclient
     .get<any>(url)
     .pipe(catchError(this.handleError));
   }
 
   getNewid(Newid: number){
-    const url = `${this.REST_API_SERVER}/data/search/`+Newid;
+    const url = `${this.REST_API_SERVER}/api/search/`+Newid;
     return this.httpclient
     .get<any>(url)
     .pipe(catchError(this.handleError));
   }
 
   addNew(data: any) {
-    const url = `${this.REST_API_SERVER}/data/update`;
+    const url = `${this.REST_API_SERVER}/api/update`;
     return this.httpclient
     .post<any>(url, data)
     .pipe(catchError(this.handleError));
   }
 
   repairNew(data: any) {
-    const url = `${this.REST_API_SERVER}/data/update`;
+    const url = `${this.REST_API_SERVER}/api/update`;
     return this.httpclient
     .put<any>(url, data)
     .pipe(catchError(this.handleError));
   }
 
   delNew(Newid: number) {
-    const url = `${this.REST_API_SERVER}/data/delete/`+Newid;
+    const url = `${this.REST_API_SERVER}/api/delete/`+Newid;
     return this.httpclient
     .delete<any>(url)
     .pipe(catchError(this.handleError));
