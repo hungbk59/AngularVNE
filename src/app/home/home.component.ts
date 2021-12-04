@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../Services/auth.service';
 import { CommonService } from '../Services/common.service';
 import { ToastrService } from 'ngx-toastr';
+import { HttpService } from '../Services/http.service';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,8 @@ export class HomeComponent implements OnInit {
     private common: CommonService,
     private authService: AuthService,
     private router: Router,
-    private toastr: ToastrService,) {
+    private toastr: ToastrService,
+    private Http: HttpService) {
     this.age = common.age;
   }
   ngOnInit(): void {
@@ -43,6 +45,9 @@ export class HomeComponent implements OnInit {
       this.vocative = "bạn"
   }
   public logout(){
+    this.Http.logout().subscribe((response) =>{
+      console.log(response)},
+      (error) => console.log(error))
     this.authService.removeToken()
     this.toastr.warning("Bạn đã thoát tài khoản")
     console.log('Đã dăng xuất')

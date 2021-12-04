@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { catchError, map, publish, tap} from 'rxjs/operators';
+import { catchError} from 'rxjs/operators';
 
 
 @Injectable({
@@ -17,7 +17,13 @@ export class HttpService {
   login(data: any){
     const url = `${this.REST_API_SERVER}/api/login`;
     return this.httpclient
-    .post<any>(url, data)
+    .post<any>(url, data, { withCredentials: true })
+    .pipe(catchError(this.handleError));
+  }
+  logout(){
+    const url = `${this.REST_API_SERVER}/api/logout`;
+    return this.httpclient
+    .get<any>(url, { withCredentials: true })
     .pipe(catchError(this.handleError));
   }
 
@@ -45,21 +51,21 @@ export class HttpService {
   addNew(data: any) {
     const url = `${this.REST_API_SERVER}/api/update`;
     return this.httpclient
-    .post<any>(url, data)
+    .post<any>(url, data, { withCredentials: true })
     .pipe(catchError(this.handleError));
   }
 
   repairNew(data: any) {
     const url = `${this.REST_API_SERVER}/api/update`;
     return this.httpclient
-    .put<any>(url, data)
+    .put<any>(url, data, { withCredentials: true })
     .pipe(catchError(this.handleError));
   }
 
   delNew(Newid: number) {
     const url = `${this.REST_API_SERVER}/api/delete/`+Newid;
     return this.httpclient
-    .delete<any>(url)
+    .delete<any>(url, { withCredentials: true })
     .pipe(catchError(this.handleError));
   }
   
